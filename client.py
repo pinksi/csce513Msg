@@ -11,7 +11,7 @@ class Client:
 
         msg = tkinter.Tk()
         msg.withdraw()
-        self.name = simpledialog.askstring("Name", "Please choose a name", parent=msg)
+        self.name = simpledialog.askstring("Username", "Please provide a name", parent=msg)
         self.gui_done = False
         self.running = True
 
@@ -23,25 +23,25 @@ class Client:
 
     def gui_loop(self):
         self.win = tkinter.Tk()
-        self.win.configure(bg="lightgray")
+        self.win.configure(bg="lightblue")
 
-        self.chat_label = tkinter.Label(self.win, text="Chat:", bg="lightgray")
-        self.chat_label.config(font=("Arial", 12))
+        self.chat_label = tkinter.Label(self.win, text="Chat:", bg="lightblue")
+        self.chat_label.config(font=("Calibri", 12))
         self.chat_label.pack(padx=20, pady=5)
 
         self.text_area = tkinter.scrolledtext.ScrolledText(self.win)
         self.text_area.pack(padx=20, pady=5)
         self.text_area.config(state="disabled")
 
-        self.msg_label = tkinter.Label(self.win, text="Message:", bg="lightgray")
-        self.msg_label.config(font=("Arial", 12))
+        self.msg_label = tkinter.Label(self.win, text="Message:", bg="lightblue")
+        self.msg_label.config(font=("Calibri", 12))
         self.msg_label.pack(padx=20, pady=5)
 
         self.input_area = tkinter.Text(self.win, height=3)
         self.input_area.pack(padx=20, pady=5)
 
         self.send_button = tkinter.Button(self.win, text="Send", command=self.write)
-        self.send_button.config(font=("Arial", 12))
+        self.send_button.config(font=("Calibri", 12))
         self.send_button.pack(padx=20, pady=5)
 
         self.gui_done = True
@@ -84,6 +84,6 @@ class Client:
                 break    
 
 if __name__ == '__main__':
-    HOST = "127.0.0.1"
-    PORT = 9090
-    client = Client(HOST, PORT)
+    TCP_IP = "127.0.0.1"
+    TCP_PORT = 1234
+    client = Client(TCP_IP, TCP_PORT)

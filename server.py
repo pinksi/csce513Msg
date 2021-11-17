@@ -28,33 +28,33 @@ def handle(client):
 def receive():
     while True:
         # accept connection
-        client, address = server.accept()
-        print(f"Connected with {str(address)}!")
+        client_socket, client_address = server_socket.accept()
+        print(f"Connected with {str(client_address)}!")
         
         # request and store name
-        client.send("NAME: ".encode('utf-8'))
-        name = client.recv(1024)
+        client_socket.send("NAME: ".encode('utf-8'))
+        name = client_socket.recv(1024)
         names.append(name)
-        clients.append(client)
+        clients.append(client_socket)
 
         # print and broadcast name
         print(f"Name of the client is {str(name)}")
         broadcast(f"{str(name)} joined! \n".encode('utf-8'))
-        client.send("Connected to the server! \n".encode("utf-8"))
+        client_socket.send("Connected to the server! \n".encode("utf-8"))
 
         # start handling thread for client
-        thread = threading.Thread(target=handle, args=(client,))
+        thread = threading.Thread(target=handle, args=(client_socket,))
         thread.start()    
 
 if __name__ == '__main__':
-    HOST = '127.0.0.1' 
-    PORT = 9090
+    TCP_IP = '127.0.0.1'
+    TCP_PORT = 1234
 
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server.bind((HOST, PORT))
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind((TCP_IP, TCP_PORT))
 
-    server.listen()
+    server_socket.listen()
 
     # list of clients (students) and their names
     clients = []
