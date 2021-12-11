@@ -25,7 +25,7 @@ def recieve_message():
 
 def send_message():
     while True:
-        message = f"{input()}"
+        message = f"{name}: {input()}"
         client_socket.send(message.encode('utf-8'))
 
 receive_thread = threading.Thread(target=recieve_message)
