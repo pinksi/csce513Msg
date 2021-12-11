@@ -71,6 +71,10 @@ class Client:
                 message = self.sock.recv(1024).decode('utf-8')
                 if message == 'NAME: ':
                     self.sock.send(self.name.encode('utf-8'))
+                if message == 'bye':
+                    message = "Leaving the chat room."
+                    self.sock.send(message.encode())
+                    break
                 else:
                     if self.gui_done:
                         self.text_area.config(state='normal')
